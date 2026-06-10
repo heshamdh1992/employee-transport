@@ -149,6 +149,13 @@
 <script>
 const API_URL = "https://script.google.com/macros/s/AKfycbzsE_IwrIBF85ULiBSKYGdVxiH8St7W-mqGiv363w0dhbHDQqbYLSOULk5PdvfIvDoGzw/exec";
 
+function formatWhatsAppNumber(phone) {
+  return String(phone || "")
+    .replace(/\D/g, "")
+    .replace(/^00/, "");
+}
+
+
 async function searchEmployee() {
   const employeeId = document.getElementById("employee_id").value.trim();
   const verificationCode = document.getElementById("verification_code").value.trim();
