@@ -194,7 +194,9 @@ async function searchEmployee() {
         <strong>تاريخ الرحلة:</strong> ${data.trip_date || "-"}<br>
         <strong>ملاحظات:</strong> ${data.notes || "-"}<br>
 
-        ${phone ? `<a class="call-btn" href="tel:${phone}">اتصال بالسائق</a>` : ""}
+        ${phone ? `<a class="call-btn" href="https://wa.me/${formatWhatsAppNumber(phone)}" target="_blank">
+  مراسلة السائق عبر واتساب
+</a>` : ""}
       </div>
     `;
 
