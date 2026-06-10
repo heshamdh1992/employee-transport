@@ -1,74 +1,103 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>بيانات النقل</title>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f6f8;
+      font-family: Arial, Tahoma, sans-serif;
+      background: #f3f6f4;
       direction: rtl;
+      color: #222;
     }
 
     .page {
       min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 20px;
+      align-items: center;
+      padding: 18px;
     }
 
     .card {
       width: 100%;
-      max-width: 430px;
+      max-width: 520px;
       background: #ffffff;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
     }
 
-    h2 {
-      margin-top: 0;
-      color: #054239;
+    .header {
+      background: #007a3d;
+      padding: 0;
       text-align: center;
+    }
+
+    .logo {
+      width: 100%;
+      display: block;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      text-align: center;
+      color: #007a3d;
+      font-size: 34px;
     }
 
     .subtitle {
       text-align: center;
-      color: #666;
-      font-size: 14px;
-      margin-bottom: 22px;
+      color: #555;
+      font-size: 15px;
+      margin-bottom: 24px;
+      line-height: 1.7;
     }
 
     label {
       display: block;
-      margin-top: 14px;
-      margin-bottom: 6px;
+      margin: 14px 0 7px;
       font-weight: bold;
       color: #333;
     }
 
     input {
       width: 100%;
-      padding: 13px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid #ccd5d0;
+      border-radius: 12px;
       font-size: 16px;
-      box-sizing: border-box;
+      outline: none;
+      text-align: right;
+    }
+
+    input:focus {
+      border-color: #007a3d;
+      box-shadow: 0 0 0 3px rgba(0, 122, 61, 0.12);
     }
 
     button {
       width: 100%;
-      margin-top: 18px;
-      padding: 14px;
-      background: #054239;
+      margin-top: 20px;
+      padding: 15px;
+      background: #007a3d;
       color: #ffffff;
       border: none;
-      border-radius: 10px;
-      font-size: 17px;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: bold;
       cursor: pointer;
     }
 
@@ -77,153 +106,237 @@
       cursor: not-allowed;
     }
 
-    .result {
-      margin-top: 22px;
-      background: #f7f7f7;
-      border-radius: 14px;
-      padding: 16px;
-      line-height: 2;
-      border-right: 5px solid #054239;
-    }
-
-    .result-title {
-      font-weight: bold;
-      color: #054239;
-      margin-bottom: 8px;
-      font-size: 18px;
-    }
-
     .error {
       margin-top: 18px;
-      padding: 12px;
+      padding: 13px;
       background: #fdecec;
       color: #a10000;
-      border-radius: 10px;
+      border-radius: 12px;
       text-align: center;
+      line-height: 1.7;
     }
 
-    .call-btn {
-      display: block;
+    .transport-card {
+      margin-top: 24px;
+      background: #f7fbf8;
+      border: 1px solid #dce8e1;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .transport-title {
       text-align: center;
-      margin-top: 14px;
-      padding: 12px;
-      background: #0b6b5d;
-      color: white;
+      font-size: 26px;
+      font-weight: bold;
+      color: #007a3d;
+      padding-bottom: 12px;
+      margin-bottom: 12px;
+      border-bottom: 1px solid #b7d2c4;
+    }
+
+    .transport-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid #e3ece7;
+      font-size: 16px;
+    }
+
+    .transport-row span {
+      color: #007a3d;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .transport-row strong {
+      color: #222;
+      text-align: left;
+      direction: ltr;
+      word-break: break-word;
+    }
+
+    .whatsapp-btn {
+      display: block;
+      margin-top: 18px;
+      padding: 14px;
+      text-align: center;
+      background: #16a34a;
+      color: #ffffff;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 12px;
+      font-size: 17px;
       font-weight: bold;
     }
 
     .footer {
-      margin-top: 18px;
+      margin-top: 20px;
       text-align: center;
       font-size: 12px;
-      color: #888;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 480px) {
+      .content {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .transport-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .transport-row strong {
+        text-align: right;
+      }
     }
   </style>
 </head>
 
 <body>
 
-<div class="page">
-  <div class="card">
-    <div class="logo-container">
-    <img src="https://ittn.ie/wp-content/uploads/2015/09/Goal-Logo-hires.png"
-         alt="GOAL"
-         class="logo">
+  <div class="page">
+    <div class="card">
 
-    <div class="org-name">
-        GOAL
-    </div>
-</div>
-    <h2> بيانات نقل مبيت الموظفين</h2>
-    <div class="subtitle">أدخل رقم الموظف وكود التحقق لمعرفة بيانات السائق</div>
+      <div class="header">
+        <img src="logo.jpeg" alt="GOAL Logo" class="logo" />
+      </div>
 
-    <label for="employee_id">رقم الموظف</label>
-    <input type="text" id="employee_id">
+      <div class="content">
+        <h1> بيانات نقل موظفي المبيت</h1>
 
-    <label for="verification_code">كود التحقق</label>
-    <input type="text" id="verification_code" placeholder="مثال: 7845">
+        <div class="subtitle">
+          يرجى إدخال رقم الموظف وكود التحقق لعرض بيانات السائق
+        </div>
 
-    <button id="searchBtn" onclick="searchEmployee()">بحث</button>
+        <label for="employee_id">رقم الموظف</label>
+        <input type="text" id="employee_id" placeholder="مثال: H001" autocomplete="off" />
 
-    <div id="output"></div>
+        <label for="verification_code">كود التحقق</label>
+        <input type="text" id="verification_code" placeholder="مثال: 7845" autocomplete="off" />
 
-    <div class="footer">
-      يرجى عدم مشاركة كود التحقق مع الآخرين
+        <button id="searchBtn" onclick="searchEmployee()">عرض بيانات النقل</button>
+
+        <div id="output"></div>
+
+        <div class="footer">
+          يرجى عدم مشاركة رقم الموظف أو كود التحقق مع الآخرين
+        </div>
+      </div>
+
     </div>
   </div>
-</div>
 
-<script>
-const API_URL = "https://script.google.com/macros/s/AKfycbzsE_IwrIBF85ULiBSKYGdVxiH8St7W-mqGiv363w0dhbHDQqbYLSOULk5PdvfIvDoGzw/exec";
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbzsE_IwrIBF85ULiBSKYGdVxiH8St7W-mqGiv363w0dhbHDQqbYLSOULk5PdvfIvDoGzw/exec";
 
-function formatWhatsAppNumber(phone) {
-  return String(phone || "")
-    .replace(/\D/g, "")
-    .replace(/^00/, "");
-}
-
-
-async function searchEmployee() {
-  const employeeId = document.getElementById("employee_id").value.trim();
-  const verificationCode = document.getElementById("verification_code").value.trim();
-  const output = document.getElementById("output");
-  const searchBtn = document.getElementById("searchBtn");
-
-  output.innerHTML = "";
-
-  if (!employeeId || !verificationCode) {
-    output.innerHTML = `<div class="error">يرجى إدخال البيانات المطلوبة.</div>`;
-    return;
-  }
-
-  searchBtn.disabled = true;
-  searchBtn.innerText = "جاري البحث...";
-
-  try {
-    const response = await fetch(API_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        employee_id: employeeId,
-        verification_code: verificationCode
-      })
-    });
-
-    const data = await response.json();
-
-    if (!data.success) {
-      output.innerHTML = `<div class="error">بيانات الدخول غير صحيحة.</div>`;
-      return;
+    function formatWhatsAppNumber(phone) {
+      return String(phone || "")
+        .replace(/\D/g, "")
+        .replace(/^00/, "");
     }
 
-    const phone = data.driver_phone || "";
+    function safeText(value) {
+      return value === null || value === undefined || value === "" ? "-" : String(value);
+    }
 
-    output.innerHTML = `
-      <div class="result">
-        <div class="result-title">معلومات النقل</div>
-        <strong>اسم الموظف:</strong> ${data.employee_name || "-"}<br>
-        <strong>اسم السائق:</strong> ${data.driver_name || "-"}<br>
-        <strong>رقم هاتف السائق:</strong> ${phone || "-"}<br>
-        <strong>رقم السيارة:</strong> ${data.vehicle_number || "-"}<br>
-        <strong>نقطة التجمع:</strong> ${data.pickup_location || "-"}<br>
-        <strong>تاريخ الرحلة:</strong> ${data.trip_date || "-"}<br>
-        <strong>ملاحظات:</strong> ${data.notes || "-"}<br>
+    async function searchEmployee() {
+      const employeeId = document.getElementById("employee_id").value.trim();
+      const verificationCode = document.getElementById("verification_code").value.trim();
+      const output = document.getElementById("output");
+      const searchBtn = document.getElementById("searchBtn");
 
-        ${phone ? `<a class="call-btn" href="https://wa.me/${formatWhatsAppNumber(phone)}" target="_blank">
-  مراسلة السائق عبر واتساب
-</a>` : ""}
-      </div>
-    `;
+      output.innerHTML = "";
 
-  } catch (error) {
-    output.innerHTML = `<div class="error">تعذر الاتصال بالخدمة. حاول لاحقًا.</div>`;
-  } finally {
-    searchBtn.disabled = false;
-    searchBtn.innerText = "بحث";
-  }
-}
-</script>
+      if (!employeeId || !verificationCode) {
+        output.innerHTML = `<div class="error">يرجى إدخال رقم الموظف وكود التحقق.</div>`;
+        return;
+      }
+
+      searchBtn.disabled = true;
+      searchBtn.innerText = "جاري البحث...";
+
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          body: JSON.stringify({
+            employee_id: employeeId,
+            verification_code: verificationCode
+          })
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+          output.innerHTML = `<div class="error">بيانات الدخول غير صحيحة.</div>`;
+          return;
+        }
+
+        const phone = safeText(data.driver_phone);
+        const whatsappPhone = formatWhatsAppNumber(phone);
+
+        output.innerHTML = `
+          <div class="transport-card">
+            <div class="transport-title">بيانات النقل</div>
+
+            <div class="transport-row">
+              <span>اسم الموظف:</span>
+              <strong>${safeText(data.employee_name)}</strong>
+            </div>
+
+            <div class="transport-row">
+              <span>اسم السائق:</span>
+              <strong>${safeText(data.driver_name)}</strong>
+            </div>
+
+            <div class="transport-row">
+              <span>رقم هاتف السائق:</span>
+              <strong>${phone}</strong>
+            </div>
+
+            <div class="transport-row">
+              <span>رقم السيارة:</span>
+              <strong>${safeText(data.vehicle_number)}</strong>
+            </div>
+
+            <div class="transport-row">
+              <span>نقطة التجمع:</span>
+              <strong>${safeText(data.pickup_location)}</strong>
+            </div>
+
+            <div class="transport-row">
+              <span>تاريخ الرحلة:</span>
+              <strong>${safeText(data.trip_date)}</strong>
+            </div>
+
+            <div class="transport-row">
+              <span>ملاحظات:</span>
+              <strong>${safeText(data.notes)}</strong>
+            </div>
+
+            ${
+              whatsappPhone && whatsappPhone !== "-"
+              ? `<a class="whatsapp-btn" href="https://wa.me/${whatsappPhone}" target="_blank">
+                   مراسلة السائق عبر واتساب
+                 </a>`
+              : ""
+            }
+          </div>
+        `;
+
+      } catch (error) {
+        output.innerHTML = `<div class="error">تعذر الاتصال بالخدمة. حاول لاحقًا.</div>`;
+      } finally {
+        searchBtn.disabled = false;
+        searchBtn.innerText = "عرض بيانات النقل";
+      }
+    }
+  </script>
 
 </body>
 </html>
